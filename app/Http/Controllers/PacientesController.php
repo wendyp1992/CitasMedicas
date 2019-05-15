@@ -39,7 +39,7 @@ class PacientesController extends Controller
     {
         //
          //Instanciamos la clase Pacientes
-        $paciente = new Pacientes;
+         $paciente = new Pacientes;
          //Declaramos el nombre con el nombre enviado en el request
          $paciente->dni = $request->dni;
          $paciente->first_name = $request->first_name;

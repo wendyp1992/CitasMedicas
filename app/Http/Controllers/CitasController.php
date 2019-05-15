@@ -57,6 +57,7 @@ class CitasController extends Controller
     public function show($id)
     {
         //
+        return Citas::where('id', $id)->get();
     }
 
     /**
@@ -79,7 +80,53 @@ class CitasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+		$citas=Citas::find($id);
+		if (!$citas)
+		{
+			return response()->json(['errors'=>array(['code'=>404,'message'=>'No se encuentra un cita con ese código.'])],404);
+		}		
+
+        // Listado de campos recibidos teóricamente.
+         $date = $request->input('date');
+         $specialty = $request->input('specialty');
+         $id_paciente = $request->input('id_paciente');
+		if ($request->method() === 'PATCH')
+		{
+			// Creamos una bandera para controlar si se ha modificado algún dato en el método PATCH.
+			$bandera = false;
+			// Actualización parcial de campos.
+            if ($specialty)
+			{
+				$citas->specialty = $specialty;
+				$bandera=true;
+            }
+            
+			if ($citas)
+			{
+				// Almacenamos en la base de datos el registro.
+				$citas->save();
+				return response()->json(['status'=>'ok','data'=>$citas], 200);
+			}
+			else
+			{
+				// Se devuelve un array errors con los errores encontrados y cabecera HTTP 304 Not Modified – [No Modificada] Usado cuando el cacheo de encabezados HTTP está activo
+				// Este código 304 no devuelve ningún body, así que si quisiéramos que se mostrara el mensaje usaríamos un código 200 en su lugar.
+				return response()->json(['errors'=>array(['code'=>304,'message'=>'No se ha modificado ningún dato de Paciente.'])],304);
+			}
+		}
+		// Si el método no es PATCH entonces es PUT y tendremos que actualizar todos los datos.
+		if (!$date || !$specialty || !$id_paciente)
+		{
+			// Se devuelve un array errors con los errores encontrados y cabecera HTTP 422 Unprocessable Entity – [Entidad improcesable] Utilizada para errores de validación.
+			return response()->json(['errors'=>array(['code'=>422,'message'=>'Faltan valores para completar el procesamiento.'])],422);
+		}
+
+		$citas->date = $date;
+		$citas->specialty = $specialty;
+        $citas->id_paciente = $id_paciente;
+		// Almacenamos en la base de datos el registro.
+		$citas->save();
+		return response()->json(['status'=>'ok','data'=>$citas], 200);
     }
 
     /**
@@ -91,5 +138,17 @@ class CitasController extends Controller
     public function destroy($id)
     {
         //
+        $citas=Citas::find($id);
+
+		// Si no existe ese fabricante devolvemos un error.
+		if (!$citas)
+		{
+			// Se devuelve un array errors con los errores encontrados y cabecera HTTP 404.
+			// En code podríamos indicar un código de error personalizado de nuestra aplicación si lo deseamos.
+			return response()->json(['errors'=>array(['code'=>404,'message'=>'No se encuentra citas con ese código.'])],404);
+		}		
+
+		// Procedemos por lo tanto a eliminar la cita.
+		$citas->delete();
     }
 }
