@@ -80,7 +80,14 @@
     </form>
   </div>
 </nav>
-            <div class="content">
+
+
+<div class="content">
+ <section class="container-fluid banner">
+    <div class="row">
+            <img class="promo" src="{{asset('img/banner.jpg')}}?v=2" alt=""/>
+    </div>
+  </section>
                 <div class="title m-b-md">
                     Laravel
                 </div>
