@@ -21,7 +21,3 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //Agregamos nuestra ruta al controller de Pacientes
 Route::resource('/pacientes', 'PacientesController');
 Route::resource('/citas', 'CitasController');
-Route::get('/', function()
-{
-    return 'Hola Mundo.';
-});
