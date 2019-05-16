@@ -19,6 +19,13 @@ class CitasController extends Controller
 
     }
 
+    protected function obtenerCitas()
+    {
+    	$respuesta = $this->realizarPeticion('GET', 'http://localhost:8888/laravel/CitasMedicas/public/api/citas');
+    	$datos = json_decode($respuesta);
+    	$citas = $datos->data;
+    	return $citas;
+    }
     /**
      * Show the form for creating a new resource.
      *
