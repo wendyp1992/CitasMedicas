@@ -10708,16 +10708,20 @@ a.text-dark:focus {
   min-width: 460px;
 }
 
+.container .fondo {
+  background: #33e3ff;
+}
+
 .footer {
   border-top: solid 1px #aebccd;
   padding: 15px 0;
-  background: linear-gradient(to bottom, #131339 0%, #535b76 100%);
+  background: linear-gradient(to bottom, #535b76 0%, #535b76 100%);
   /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#0d1c34", endColorstr="#12274a",GradientType=0 );
   /* IE6-9 */
 }
 
 .promo {
-  margin-left: 20px;
+  margin-top: 60px;
 }
 

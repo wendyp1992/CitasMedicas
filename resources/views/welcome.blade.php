@@ -20,67 +20,77 @@
             href="https://fonts.googleapis.com/css?family=Nunito:200,600"
             rel="stylesheet"
         />
+        <style>
+            html,
+            body {
+                background-color: #fff;
+                color: #636b6f;
+                font-family: "Nunito", sans-serif;
+                font-weight: 200;
+                height: 100vh;
+                margin: 0;
+            }
+            .flex-center {
+                align-items: center;
+                display: flex;
+                justify-content: center;
+            }
+            .position-ref {
+                position: relative;
+            }
+            .top-right {
+                position: absolute;
+                right: 10px;
+                top: 18px;
+            }
+            .content {
+                text-align: center;
+            }
+            .title {
+                font-size: 84px;
+            }
+            .links > a {
+                color: #636b6f;
+                padding: 0 25px;
+                font-size: 13px;
+                font-weight: 600;
+                letter-spacing: 0.1rem;
+                text-decoration: none;
+                text-transform: uppercase;
+            }
+            .m-b-md {
+                margin-bottom: 30px;
+            }
+        </style>
     </head>
     <body>
-        <div>
-            <div class="header_container">
-                <div class="header_top">
-                    <div class="row">
-                        <div class="col-md-2"></div>
-                        <div class="col-md-2">
-                            
-                        </div>
-                    </div>
-                </div>
-                <div class="header_top2"></div>
-                <div class="header_top3">
-                    <div class="row">
-                        <div class="col">
-                                <img
-                                height="50"
-                                class="mr-3 promo"
-                                src="{{ asset('img/iconos/home.png') }}?v=2"
-                                alt=""
-                            />
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    @if (Route::has('login'))
+                    <a href="{{ url('/') }}">Home</a>
 
-                            <img
-                                height="50"
-                                class="mr-3 promo"
-                                src="{{ asset('img/iconos/what.png') }}?v=2"
-                                alt=""
-                            />
-                            <img
-                                height="50"
-                                class="mr-3 promo"
-                                src="{{ asset('img/iconos/requisitos.png') }}?v=2"
-                                alt=""
-                            />
-                            <img
-                                height="50"
-                                class="mr-3 promo"
-                                src="{{ asset('img/iconos/procesos.png') }}?v=2"
-                                alt=""
-                            />
-                            <img
-                                height="50"
-                                class="mr-3 promo"
-                                src="{{ asset('img/iconos/preguntas.png') }}?v=2"
-                                alt=""
-                            />
-                        </div>
-                        <div class="col"></div>
-                    </div>
+                    @auth
+                    <a href="{{ url('/home') }}">Home</a>
+                    @else
+                    <a href="{{ route('login') }}">Login</a>
+
+                    @if (Route::has('register'))
+                    <a href="{{ route('register') }}">Register</a>
+                    @endif @endauth @endif
                 </div>
             </div>
-            <div class="title m-b-md"></div>
-        </div>
 
-        <div class="container-fluid">
-            <div class="row"></div>
+            <div class="row">
+                <img
+                    class="promo"
+                    src="{{ asset('img/banner.jpg') }}?v=2"
+                    alt=""
+                />
+            </div>
+            <div class="row">
+                hola
+            </div>
         </div>
-        <div class="footer  text-center">
-            &copy Derechos reservados.
-        </div>
-    </div>
     </body>
 </html>
